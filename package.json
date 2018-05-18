@@ -1,8 +1,12 @@
 {
   "name": "postgrator",
-  "version": "2.10.2",
+  "version": "3.6.0",
   "author": "Rick Bergfalk <rick.bergfalk@gmail.com>",
-  "description": "Postgrator is a SQL migration tool for SQL people",
+  "description": "A SQL migration tool for SQL people",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "keywords": [
     "migrator",
     "migration",
@@ -12,13 +16,23 @@
     "sql server",
     "sql"
   ],
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "lint-staged": {
+    "*.{js,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "scripts": {
-    "standard": "standard",
-    "standard-fix": "standard --fix",
-    "test": "node test/test-postgrator.js"
+    "precommit": "lint-staged",
+    "lint": "eslint '**/*.js'",
+    "test": "mocha --require ts-node/register --recursive \"test/**/*.{js,ts}\""
   },
   "dependencies": {
-    "async": "0.2.x",
+    "glob": "^7.1.2",
     "newline": "0.0.3"
   },
   "repository": {
@@ -26,7 +40,25 @@
     "url": "git://github.com/rickbergfalk/postgrator.git"
   },
   "main": "postgrator",
+  "types": "postgrator.d.ts",
   "devDependencies": {
-    "standard": "^10.0.1"
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^9.4.6",
+    "eslint": "^4.10.0",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "mocha": "^4.0.1",
+    "mssql": "^4.1.0",
+    "mysql": "^2.15.0",
+    "pg": "^7.4.1",
+    "prettier": "^1.7.4",
+    "ts-node": "^4.1.0",
+    "typescript": "^2.7.1"
   }
 }
